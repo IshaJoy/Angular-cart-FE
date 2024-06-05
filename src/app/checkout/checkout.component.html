@@ -1,0 +1,50 @@
+<app-header></app-header>
+<div style="height: 90vh;" class="mt-5 d-flex justify-content-center align-items-center w-100">
+    <div class="delivary w-50 mt-5 mb-5">
+        <div *ngIf="!checkoutStatus">
+            <h1>Delivary Details</h1>
+            <form [formGroup]="checkoutForm" class="border rounded p-3">
+                <div class="form-floating mb-3">
+                    <input name="name" formControlName="name" type="text" class="form-control" id="exampleInputName"
+                        placeholder="Name">
+                    <label for="exampleInputName">Name</label>
+
+                </div>
+                <div class="form-floating mb-3">
+                    <input name="address" formControlName="address" type="text" class="form-control"
+                        id="exampleInputAddr" placeholder="address">
+                    <label for="exampleInputAddr">Address</label>
+
+                </div>
+                <div class="form-floating mb-3">
+                    <input name="pincode" formControlName="pincode" type="text" class="form-control"
+                        id="exampleInputPin" placeholder="Pincode">
+                    <label for="exampleInputPin">Pincode</label>
+
+                </div>
+                <div class="d-flex justify-content-evently mb-3">
+                    <button (click)="cancel()" class="btn btn-warning">Cancel</button>
+                    <button (click)="proceedToBuy()" class="btn btn-primary ms-5">Proceed to Buy</button>
+
+                </div>
+
+            </form>
+        </div>
+        <div *ngIf="checkoutStatus">
+            <h1>Payment Details</h1>
+            <hr>
+            <span>To Adress</span>
+            <h4>{{checkoutForm.value.name}}</h4>
+            <h4>{{checkoutForm.value.address}}</h4>
+            <h4>{{checkoutForm.value.pincode}}</h4>
+            <h4>Total Amount: ${{totalamount}}</h4>
+            <div class="payment mt-5">
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>

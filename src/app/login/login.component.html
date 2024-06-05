@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div style="height: 100vh;" class="w-100 d-flex flex-column justify-content-center align-items-center">
+
+    <div class="row border shadow rounded w-75">
+        <div class="col-lg-6">
+
+            <img class="img-fluid"
+                src="https://i.pinimg.com/736x/d1/54/66/d154660a6ae3104de2b0a314667a5ab6.jpg"
+                alt="">
+        </div>
+        <div class="col-lg-6 mt-5">
+            <div style="height: 100%;" class="w-100 d-flex align-items-center flex-column ">
+                <h4 class="fw-bold text-success">WELCOME USER!!!</h4>
+                <form [formGroup]="loginForm"  class=" w-100 mt-3">
+                    <div class="mb-3 form-floating">
+                        <input name="email" formControlName="email"  type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Email address</label>
+
+                    </div>
+                    <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="text-danger mb-3">Invalid Email</div>
+
+                    <div class="mb-3">
+                        <input  name="password" formControlName="password"  type="password" class="form-control" id="floatingPassword" placeholder="password">
+                        <label for="floatingPassword">Password</label>
+
+                    </div>
+                    <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="text-danger mb-3">Invalid Email</div>
+
+
+                    <div class="mt-3">
+                        <button (click)="login()" type="submit" class="btn btn-primary">Login</button>
+
+                    </div>
+                </form>
+                <p>New User?Click here to <a routerLink="/register">Register</a></p>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

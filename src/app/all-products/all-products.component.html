@@ -1,0 +1,80 @@
+<app-header></app-header>
+  <!-- Header-->
+  <header >
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img height="550px" src="https://piffyboutique.com/cdn/shop/files/sale-banner_71e33153-2ce3-4558-9a6c-105e39fc1bf4.jpg?v=1670100321&width=3840" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img height="560px" src="https://static.vecteezy.com/system/resources/previews/007/001/730/original/hello-summer-banner-background-free-vector.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img height="550px" src="https://www.endlesssummerboutiquesd.com/cdn/shop/files/HOME_-_Fade_Slideshow_3_fc6c1812-a0fa-4d8b-a4ec-25731b2a8b37.png?v=1695054022" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item">
+            <img height="550px" src="https://piffyboutique.com/cdn/shop/files/sale-banner_71e33153-2ce3-4558-9a6c-105e39fc1bf4.jpg?v=1670100321&width=3840" class="d-block w-100" alt="...">
+          </div>
+         
+          <div class="carousel-item">
+            <img height="560px" src="https://static.vecteezy.com/system/resources/previews/007/001/730/original/hello-summer-banner-background-free-vector.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item active">
+            <img height="550px" src="https://www.endlesssummerboutiquesd.com/cdn/shop/files/HOME_-_Fade_Slideshow_3_fc6c1812-a0fa-4d8b-a4ec-25731b2a8b37.png?v=1695054022" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div> -->
+</header>
+<!-- Section-->
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          <div *ngIf="(allProducts | search : searchKey).length==0" class="fw-bolder mt-5 text-danger text-center mb-5 fs-1 w-100">Product not found</div>
+            <div class="col mb-5" *ngFor="let product of allProducts | search : searchKey ">
+                <div class="card h-100 p-2">
+                    <!-- Product image-->
+                    <img height="250px" width="200px" class="card-img-top" routerLink="/view/{{product.id}}" style="cursor: pointer;" [src]="product.image" [alt]="product.title" />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{product.title.slice(0,20)}}...</h5>
+                            <!-- Product price-->
+                            $ {{product.price}}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <button (click)="addToWishlist(product)" class="btn"><i class="fa-solid fa-heart text-danger me-2"></i></button>
+                            <button (click)="addToCart(product)" class="btn"><i class="fa-solid fa-cart-arrow-down text-success me-2"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</section>

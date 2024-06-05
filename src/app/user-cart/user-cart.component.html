@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<section class="py-2">
+    <div *ngIf="allProducts.length==0" class="d-flex justify-content-center flex-column align-items-center w-100">
+        <img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="">
+        <h1 style="color: rgb(255, 204, 0);">Your Cart is Empty!!! </h1>
+
+
+    </div>
+    <div *ngIf="allProducts.length!==0" class="container px-4 px-lg-5 mt-5">
+        <h1 style="color: rgb(255, 204, 0);">Your Cart</h1>
+        <div class="row ">
+            <div class="col-lg-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Image</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of allProducts;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{product.title.slice(0,20)}}..</td>
+                            <td><img width="60px" height="60px" [src]="product.image" alt=""></td>
+                            <td>
+                                <div class="d-flex">
+                                    <button (click)="decrementQuantity(product._id)" class="btn fw-bolder">-</button>
+                                    <input style="width: 60px;" [value]="product.quantity" type="text"
+                                        class="form-control" readonly>
+                                    <button (click)="incrementQuantity(product._id)" class="btn fw-bolder">+</button>
+
+                                </div>
+                            </td>
+                            <td>{{product.totalPrice}}</td>
+                            <td><button (click)="deleteItem(product._id)" class="btn"><i
+                                        class="fa-solid fa-trash text-danger"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="float-end mt-2">
+                    <button (click)="emptyCart()" class="btn btn-danger">EMPTY CART</button>
+                    <button routerLink="" class="btn btn-success ms-3">SHOP MORE</button>
+                </div>
+            </div>
+            <div class="col-lg-4 mt-5">
+                <div class="border rounded p-3">
+                    <h3>Cart Total: <span class="text-danger"> $ {{cartTotalPrice}} </span></h3>
+                    <h6 *ngIf="!couponStatus" (click)="getCoupon()" class="btn ">Click here to view<i
+                            class="fa-solid fa-tag"></i>Offers</h6>
+                    <!-- gift coupons -->
+                    <div *ngIf="couponStatus" class="d-flex justify-content-evenly mt-3">
+                        <ng-container
+                            *ngIf="cartTotalPrice>=50 && cartTotalPrice<=250 && !couponClickStatus">
+                        <img (click)="discount10()" width="200px" height="150px"
+                            src="https://newyorkconventionprinting.com/wp-content/uploads/2015/03/10off.png" alt="">
+                        </ng-container>
+                        <ng-container *ngIf="cartTotalPrice>=250 && cartTotalPrice<=500 && !couponClickStatus">
+                            <img (click)="discount30()" width="200px" height="150px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHSxaQza38_9u1zJX8-I-_Ay4R4vV1Kz5F5hcUSJfUKddPNogoxtPzx4GR1qidaYHcasc&usqp=CAU" alt="">
+                        </ng-container>
+
+                        <ng-container *ngIf="cartTotalPrice>500 && !couponClickStatus">
+                            <img (click)="discount50()" width="200px" height="150px"
+                                src="https://banner2.cleanpng.com/20190608/vbh/kisspng-internet-coupon-voucher-discounts-and-allowances-l-5cfb986b33dc41.3604185915599924272124.jpg"
+                                alt="">
+                        </ng-container>
+
+                    </div>
+                    <hr class="mt-5">
+                    <div class="d-grid">
+                        <button (click)="checkout()"class="btn btn-success">Check Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
